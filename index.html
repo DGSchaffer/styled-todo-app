@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To-do-app</title>
+</head>
+
+<body>
+    <header>
+        <h1>To-do App</h1>
+    </header>
+    <main>
+
+        <div>
+            <form>
+                <fieldset>
+                    <input type="text" id="todoName" placeholder='Get sh*t done!"' minlength="5">
+                    <button id="addTodo">Add</button>
+                </fieldset>
+
+            </form><br><br>
+            <div class="container">
+                <div class="filter"> Filter & Options:</div>
+                <span><input type="radio" id="all" name="radio" value="all" checked><label for="all">All</label></span>
+                <span><input type="radio" id="open" name="radio" value="open"><label for="open">Open</label></span>
+                <span><input type="radio" id="done" name="radio" value="done"><label for="done">Done</label></span>
+                <br><button id="removeDone">Remove Done Todos</button>
+                <br>
+                <div class="yourtodos"> Your Todos:</div>
+                <ul id="todolist" class="lista">
+                </ul>
+                <br><br><br>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+
+</html>
