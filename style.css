@@ -43,7 +43,7 @@ fieldset {
   justify-content: space-between;
   height: 50px;
 }
-#todoName {
+#todoname {
   all: unset;
   border: 2px solid #fff;
   background-color: #fff;
@@ -55,7 +55,7 @@ fieldset {
   width: 260px;
   margin-right: 10px;
 }
-#todoName:focus {
+#todoname:focus {
   border: 2px solid #f5ab00;
 }
 button {
@@ -73,7 +73,7 @@ button {
   border: 2px solid #f5ab00;
   box-shadow: none;
 }
-#removeDone {
+#removedone {
   all: unset;
   border-radius: 10px;
   color: aliceblue;
@@ -86,7 +86,7 @@ button {
   margin-left: 10px;
   border: 2px solid #118ab2;
 }
-#removeDone:focus {
+#removedone:focus {
   border: 2px solid #f5ab00;
   box-shadow: none;
 }
@@ -173,29 +173,6 @@ button {
   background-color: #fff;
   width: 1.5em;
   height: 1.5em;
-}
-#removedItems {
-  background-color: #666;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  margin-right: 3px;
-  border: 1px dotted black;
-  text-decoration: line-through;
-}
-
-#clear {
-  margin-left: 0px;
-  background-color: darkkhaki;
-  width: 120px;
-}
-#removedone {
-  margin-left: 0px;
-  background-color: #333;
-  width: 120px;
-}
-.completed {
-  text-decoration: line-through;
 }
 .hidden {
   display: none !important;

@@ -1,9 +1,3 @@
-// Load state from local storage
-function loadState() {
-  const storedState = localStorage.getItem("todoState");
-  return storedState ? JSON.parse(storedState) : { todos: [] };
-}
-
 const state = loadState() || {
   todos: [
     { description: "Learn CSS", done: false },
@@ -14,52 +8,63 @@ const state = loadState() || {
 
 // Save state in local storage
 function saveState() {
-  localStorage.setItem("todoState", JSON.stringify(state));
+  localStorage.setItem("state", JSON.stringify(state));
+}
+// Load state from local storage
+function loadState() {
+  const storedState = localStorage.getItem("state");
+  return storedState ? JSON.parse(storedState) : { todos: [] };
 }
 
-//
-const todoNameInput = document.querySelector("#todoName");
+const todoNameInput = document.querySelector("#todoname");
 const todoList = document.querySelector("#todolist");
-const removeDone = document.getElementById("removeDone");
+const removeDone = document.getElementById("removedone");
 
-// render Todo-List:
+// generate html elements:
+function generateLi(todo) {
+  const todoLi = document.createElement("li");
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = todo.done;
+
+  checkbox.addEventListener("change", (e) => {
+    const newTodoDoneState = e.target.checked;
+    todo.done = newTodoDoneState;
+    saveState();
+
+    // Change styles when todo is checked:
+    if (checkbox.checked === true) {
+      todoLi.style.textDecoration = "line-through";
+      todoLi.dataset.status = "done";
+      checkbox.textContent = "✔";
+      checkbox.style.backgroundColor = "#06d6a0";
+    } else {
+      todoLi.style.textDecoration = "none";
+      todoLi.dataset.status = "open";
+      checkbox.textContent = "";
+      checkbox.style.backgroundColor = "#ffffff";
+    }
+  });
+
+  todoLi.appendChild(checkbox);
+  const todoText = document.createTextNode(todo.description);
+  todoLi.appendChild(todoText);
+
+  return todoLi;
+}
+
+// Render Todo-List
 function renderTodos() {
   todoList.innerHTML = "";
   state.todos.forEach((todo) => {
-    const todoLi = document.createElement("li");
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = todo.done;
-
-    checkbox.addEventListener("change", (e) => {
-      const newTodoDoneState = e.target.checked;
-      todo.done = newTodoDoneState;
-      saveState();
-
-      // change styles when todo is checked:
-      if (checkbox.checked === true) {
-        todoLi.style.textDecoration = "line-through";
-        todoLi.dataset.status = "done";
-        checkbox.textContent = "✔";
-        checkbox.style.backgroundColor = "#06d6a0";
-      } else if (checkbox.checked !== true) {
-        todoLi.style.textDecoration = "none";
-        todoLi.dataset.status = "open";
-        checkbox.textContent = "";
-        checkbox.style.backgroundColor = "#ffffff";
-      }
-    });
-
-    todoLi.appendChild(checkbox);
-    const todoText = document.createTextNode(todo.description);
-    todoLi.appendChild(todoText);
-    todoList.appendChild(todoLi);
+    const newLi = generateLi(todo);
+    todoList.appendChild(newLi);
   });
 }
 
 // click-event to add new To-do:
 
-const addTodo = document.getElementById("addTodo");
+const addTodo = document.getElementById("addtodo");
 addTodo.addEventListener("click", () => {
   const newTodoDescription = todoNameInput.value.trim();
   if (newTodoDescription.length >= 5) {
